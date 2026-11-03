@@ -1,0 +1,66 @@
+// Tunewright sync API. Secrets (never committed): TOKEN_PEPPER, TURNSTILE_SECRET.
+//   wrangler secret put TOKEN_PEPPER --env staging
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "tunewright-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "walk-tuning-db", "database_id": "local-only", "migrations_dir": "migrations" }
+  ],
+  "send_email": [{ "name": "EMAIL" }],
+  // Burst limits only: the binding counts per Cloudflare location, so hourly limits live in D1.
+  "ratelimits": [
+    { "name": "AUTH_LIMITER", "namespace_id": "4101", "simple": { "limit": 20, "period": 60 } },
+    { "name": "SHARE_LIMITER", "namespace_id": "4102", "simple": { "limit": 60, "period": 60 } }
+  ],
+  "triggers": { "crons": ["17 3 * * *"] },
+  "vars": {
+    "WEB_ORIGINS": "http://localhost:5173",
+    "WEB_APP_URL": "http://localhost:5173",
+    "MAIL_FROM": "login@tunewright.local",
+    "MIN_CLIENT_VERSION": "0.1.0"
+  },
+  "env": {
+    "staging": {
+      "name": "tunewright-api-staging",
+      "routes": [{ "pattern": "tunewright-api-staging.serendipity-work.com", "custom_domain": true }],
+      "d1_databases": [
+        { "binding": "DB", "database_name": "walk-tuning-db-staging", "database_id": "8008a88a-c5b7-45a0-8ffe-e80c719a1ba0", "migrations_dir": "migrations" }
+      ],
+      "send_email": [{ "name": "EMAIL" }],
+      "ratelimits": [
+        { "name": "AUTH_LIMITER", "namespace_id": "4201", "simple": { "limit": 20, "period": 60 } },
+        { "name": "SHARE_LIMITER", "namespace_id": "4202", "simple": { "limit": 60, "period": 60 } }
+      ],
+      "triggers": { "crons": ["17 3 * * *"] },
+      "vars": {
+        "WEB_ORIGINS": "https://tunewright-staging.serendipity-work.com",
+        "WEB_APP_URL": "https://tunewright-staging.serendipity-work.com",
+        "MAIL_FROM": "login@tunewright-mail.serendipity-work.com",
+        "MIN_CLIENT_VERSION": "0.1.0"
+      }
+    },
+    "production": {
+      "name": "tunewright-api",
+      "routes": [{ "pattern": "tunewright-api.serendipity-work.com", "custom_domain": true }],
+      "d1_databases": [
+        { "binding": "DB", "database_name": "walk-tuning-db", "database_id": "78ab318a-ef5b-4427-a2e0-bc6a8344c34a", "migrations_dir": "migrations" }
+      ],
+      "send_email": [{ "name": "EMAIL" }],
+      "ratelimits": [
+        { "name": "AUTH_LIMITER", "namespace_id": "4301", "simple": { "limit": 20, "period": 60 } },
+        { "name": "SHARE_LIMITER", "namespace_id": "4302", "simple": { "limit": 60, "period": 60 } }
+      ],
+      "triggers": { "crons": ["17 3 * * *"] },
+      "vars": {
+        "WEB_ORIGINS": "https://tunewright.serendipity-work.com",
+        "WEB_APP_URL": "https://tunewright.serendipity-work.com",
+        "MAIL_FROM": "login@tunewright-mail.serendipity-work.com",
+        "MIN_CLIENT_VERSION": "0.1.0"
+      }
+    }
+  }
+}

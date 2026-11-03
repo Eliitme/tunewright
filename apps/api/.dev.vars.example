@@ -1,0 +1,4 @@
+# Copy to .dev.vars for `wrangler dev`. Real values are set with `wrangler secret put`.
+TOKEN_PEPPER=local-dev-pepper-change-me
+# Cloudflare's published Turnstile test secret: every token passes.
+TURNSTILE_SECRET=1x0000000000000000000000000000000AA
