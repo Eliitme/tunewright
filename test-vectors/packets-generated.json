@@ -1,0 +1,267 @@
+{
+  "source": "generated",
+  "vectors": [
+    {
+      "name": "band PK 1000Hz Q1 6dB",
+      "kind": "buildBandWrite",
+      "input": {
+        "index": 0,
+        "type": "PK",
+        "freq": 1000,
+        "q": 1,
+        "gain": 6,
+        "sampleRate": 96000
+      },
+      "expectedHex": "010918000000004bf7704119042a83de96a93be7fbd57cd771e5c2e8030001000602006500"
+    },
+    {
+      "name": "band PK 20Hz Q0.1 -10dB",
+      "kind": "buildBandWrite",
+      "input": {
+        "index": 1,
+        "type": "PK",
+        "freq": 20,
+        "q": 0.1,
+        "gain": -10,
+        "sampleRate": 96000
+      },
+      "expectedHex": "01091800010000861c7f3f3e05798157e5073fc2fa867e23fe78c114001a0000f602006500"
+    },
+    {
+      "name": "band PK 20000Hz Q10 10dB",
+      "kind": "buildBandWrite",
+      "input": {
+        "index": 2,
+        "type": "PK",
+        "freq": 20000,
+        "q": 10,
+        "gain": 10,
+        "sampleRate": 96000
+      },
+      "expectedHex": "010918000200000fb7a8432443bfdfa9def438dcbc4020486a62c3204e000a000a02006500"
+    },
+    {
+      "name": "band LSQ 105Hz Q0.71 5.5dB",
+      "kind": "buildBandWrite",
+      "input": {
+        "index": 3,
+        "type": "LSQ",
+        "freq": 105,
+        "q": 0.71,
+        "gain": 5.5,
+        "sampleRate": 96000
+      },
+      "expectedHex": "01091800030000bf3a1940349e8780cc35603f4da1787ff7ce86c06900b600800501006500"
+    },
+    {
+      "name": "band HSQ 8000Hz Q0.71 -3.25dB",
+      "kind": "buildBandWrite",
+      "input": {
+        "index": 4,
+        "type": "HSQ",
+        "freq": 8000,
+        "q": 0.71,
+        "gain": -3.25,
+        "sampleRate": 96000
+      },
+      "expectedHex": "0109180004000091ca162f8fceafc6f56a16153332c955b8c959df401fb600c0fc03006500"
+    },
+    {
+      "name": "band LSQ 20Hz Q0.5 10dB",
+      "kind": "buildBandWrite",
+      "input": {
+        "index": 5,
+        "type": "LSQ",
+        "freq": 20,
+        "q": 0.5,
+        "gain": 10,
+        "sampleRate": 96000
+      },
+      "expectedHex": "0109180005000059830c40a92a2080c25ed33fb4d9df7f422220c014008000000a01006500"
+    },
+    {
+      "name": "high shelf boost beyond Q30 range falls back to identity coefficients",
+      "kind": "buildBandWrite",
+      "input": {
+        "index": 6,
+        "type": "HSQ",
+        "freq": 16000,
+        "q": 2,
+        "gain": 10,
+        "sampleRate": 96000
+      },
+      "expectedHex": "0109180006000000000040df9151840a5ef23b216eae7bf6a10dc4803e0002000a03006500"
+    },
+    {
+      "name": "high shelf +1 dB at 1 kHz falls back to identity coefficients",
+      "kind": "buildBandWrite",
+      "input": {
+        "index": 6,
+        "type": "HSQ",
+        "freq": 1000,
+        "q": 0.7,
+        "gain": 1,
+        "sampleRate": 96000
+      },
+      "expectedHex": "0109180006000000000040df9151840a5ef23b216eae7bf6a10dc4e803b300000103006500"
+    },
+    {
+      "name": "band LP 18000Hz Q0.71 0dB",
+      "kind": "buildBandWrite",
+      "input": {
+        "index": 7,
+        "type": "LP",
+        "freq": 18000,
+        "q": 0.71,
+        "gain": 0,
+        "sampleRate": 96000
+      },
+      "expectedHex": "01091800070000afbbf70b5e77ef17afbbf70b5c02ad1de80e74f25046b600000004006500"
+    },
+    {
+      "name": "band HP 25Hz Q0.71 0dB",
+      "kind": "buildBandWrite",
+      "input": {
+        "index": 8,
+        "type": "HP",
+        "freq": 25,
+        "q": 0.71,
+        "gain": 0,
+        "sampleRate": 96000
+      },
+      "expectedHex": "01091800080000b921ed3f8ebc2580b921ed3fd63dda7ff2b625c01900b600000005006500"
+    },
+    {
+      "name": "band PK 3150Hz Q4.33 -2.7dB",
+      "kind": "buildBandWrite",
+      "input": {
+        "index": 9,
+        "type": "PK",
+        "freq": 3150,
+        "q": 4.33,
+        "gain": -2.7,
+        "sampleRate": 96000
+      },
+      "expectedHex": "010918000900007c5f8a3fc5cf1386bd1a053d3b30ec79c78570c34e0c54044dfd02006500"
+    },
+    {
+      "name": "round 2.5",
+      "kind": "roundHalfAwayFromZero",
+      "input": {
+        "value": 2.5
+      },
+      "expected": 3
+    },
+    {
+      "name": "round -2.5",
+      "kind": "roundHalfAwayFromZero",
+      "input": {
+        "value": -2.5
+      },
+      "expected": -3
+    },
+    {
+      "name": "round 0.5",
+      "kind": "roundHalfAwayFromZero",
+      "input": {
+        "value": 0.5
+      },
+      "expected": 1
+    },
+    {
+      "name": "round -0.5",
+      "kind": "roundHalfAwayFromZero",
+      "input": {
+        "value": -0.5
+      },
+      "expected": -1
+    },
+    {
+      "name": "round 1.4999",
+      "kind": "roundHalfAwayFromZero",
+      "input": {
+        "value": 1.4999
+      },
+      "expected": 1
+    },
+    {
+      "name": "round -6.5",
+      "kind": "roundHalfAwayFromZero",
+      "input": {
+        "value": -6.5
+      },
+      "expected": -7
+    },
+    {
+      "name": "preamp -12",
+      "kind": "buildPreampWrite",
+      "input": {
+        "preamp": -12
+      },
+      "expectedHex": "01030200f4"
+    },
+    {
+      "name": "preamp 0",
+      "kind": "buildPreampWrite",
+      "input": {
+        "preamp": 0
+      },
+      "expectedHex": "0103020000"
+    },
+    {
+      "name": "restore defaults",
+      "kind": "buildRestoreDefaults",
+      "expectedHex": "011700"
+    },
+    {
+      "name": "filter mode FAST-LL",
+      "kind": "buildFilterModeWrite",
+      "input": {
+        "mode": "FAST-LL"
+      },
+      "expectedHex": "01110101"
+    },
+    {
+      "name": "filter mode NON-OS",
+      "kind": "buildFilterModeWrite",
+      "input": {
+        "mode": "NON-OS"
+      },
+      "expectedHex": "01110105"
+    },
+    {
+      "name": "gain mode high",
+      "kind": "buildGainModeWrite",
+      "input": {
+        "high": true
+      },
+      "expectedHex": "01190101"
+    },
+    {
+      "name": "error: freq above Nyquist",
+      "kind": "buildBandWrite",
+      "input": {
+        "index": 0,
+        "type": "PK",
+        "freq": 48000,
+        "q": 1,
+        "gain": 0,
+        "sampleRate": 96000
+      },
+      "expectedError": "RangeError"
+    },
+    {
+      "name": "error: Q zero",
+      "kind": "buildBandWrite",
+      "input": {
+        "index": 0,
+        "type": "PK",
+        "freq": 1000,
+        "q": 0,
+        "gain": 0,
+        "sampleRate": 96000
+      },
+      "expectedError": "RangeError"
+    }
+  ]
+}

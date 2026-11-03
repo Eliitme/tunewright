@@ -1,0 +1,33 @@
+{
+  "source": "hand-written",
+  "valid": [
+    { "name": "minimal", "preset": { "schema": 1, "name": "Flat", "preamp": 0, "bands": [] } },
+    { "name": "full 10 bands with filter mode", "preset": { "schema": 1, "name": "Harman IEM", "preamp": -6, "filterMode": "FAST-LL", "bands": [
+      { "type": "LSQ", "freq": 105, "q": 0.71, "gain": 5.5 }, { "type": "PK", "freq": 200, "q": 0.5, "gain": -2 },
+      { "type": "PK", "freq": 1000, "q": 1, "gain": 0 }, { "type": "PK", "freq": 2500, "q": 2, "gain": 3 },
+      { "type": "PK", "freq": 3150, "q": 4.33, "gain": -2.7 }, { "type": "PK", "freq": 5000, "q": 3, "gain": 1 },
+      { "type": "PK", "freq": 6300, "q": 5, "gain": -4 }, { "type": "PK", "freq": 8000, "q": 2, "gain": 2 },
+      { "type": "PK", "freq": 12000, "q": 1.5, "gain": -1 }, { "type": "HSQ", "freq": 10000, "q": 0.71, "gain": -3.25 } ] } },
+    { "name": "bounds inclusive", "preset": { "schema": 1, "name": "Edges", "preamp": -30, "bands": [
+      { "type": "PK", "freq": 20, "q": 0.1, "gain": -10 }, { "type": "PK", "freq": 20000, "q": 10, "gain": 10 } ] } },
+    { "name": "unknown fields are kept", "preset": { "schema": 1, "name": "Future", "preamp": 0, "author": "x", "bands": [
+      { "type": "PK", "freq": 1000, "q": 1, "gain": 1, "enabled": true } ] }, "keepsKeys": ["author", "bands.0.enabled"] }
+  ],
+  "invalid": [
+    { "name": "11 bands", "preset": { "schema": 1, "name": "Too many", "preamp": 0, "bands": [
+      {"type":"PK","freq":100,"q":1,"gain":0},{"type":"PK","freq":100,"q":1,"gain":0},{"type":"PK","freq":100,"q":1,"gain":0},
+      {"type":"PK","freq":100,"q":1,"gain":0},{"type":"PK","freq":100,"q":1,"gain":0},{"type":"PK","freq":100,"q":1,"gain":0},
+      {"type":"PK","freq":100,"q":1,"gain":0},{"type":"PK","freq":100,"q":1,"gain":0},{"type":"PK","freq":100,"q":1,"gain":0},
+      {"type":"PK","freq":100,"q":1,"gain":0},{"type":"PK","freq":100,"q":1,"gain":0} ] } },
+    { "name": "gain above 10 dB", "preset": { "schema": 1, "name": "Loud", "preamp": 0, "bands": [ { "type": "LSQ", "freq": 30, "q": 0.7, "gain": 16 } ] } },
+    { "name": "positive preamp", "preset": { "schema": 1, "name": "Boost", "preamp": 3, "bands": [] } },
+    { "name": "fractional preamp", "preset": { "schema": 1, "name": "Frac", "preamp": -6.4, "bands": [] } },
+    { "name": "Q zero", "preset": { "schema": 1, "name": "Q0", "preamp": 0, "bands": [ { "type": "PK", "freq": 1000, "q": 0, "gain": 1 } ] } },
+    { "name": "fractional freq", "preset": { "schema": 1, "name": "F", "preamp": 0, "bands": [ { "type": "PK", "freq": 1000.5, "q": 1, "gain": 1 } ] } },
+    { "name": "unknown filter type", "preset": { "schema": 1, "name": "T", "preamp": 0, "bands": [ { "type": "NOTCH", "freq": 1000, "q": 1, "gain": 1 } ] } },
+    { "name": "empty name", "preset": { "schema": 1, "name": "  ", "preamp": 0, "bands": [] } },
+    { "name": "name longer than 64", "preset": { "schema": 1, "name": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "preamp": 0, "bands": [] } },
+    { "name": "schema 2", "preset": { "schema": 2, "name": "New", "preamp": 0, "bands": [] } },
+    { "name": "bad filter mode", "preset": { "schema": 1, "name": "M", "preamp": 0, "bands": [], "filterMode": "TURBO" } }
+  ]
+}
