@@ -1,0 +1,19 @@
+node_modules/
+dist/
+coverage/
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+.wrangler/
+.dev.vars
+# Xcode / SwiftPM
+.build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+# AI assistant working files (plans, reports, agent memory) stay local
+plans/
+.claude/
+CLAUDE.md
