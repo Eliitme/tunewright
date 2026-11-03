@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TP35 Hardware Spike</title>
+    <style>
+      :root { color-scheme: light dark; --bg: #fafafa; --fg: #1a1a1a; --muted: #666; --card: #fff; --line: #ddd; --warn: #a15c00; }
+      @media (prefers-color-scheme: dark) { :root { --bg: #141414; --fg: #eee; --muted: #999; --card: #1e1e1e; --line: #333; --warn: #f0a040; } }
+      body { margin: 0; padding: 16px; background: var(--bg); color: var(--fg); font: 14px/1.5 system-ui, sans-serif; }
+      main { max-width: 960px; margin: 0 auto; }
+      .warn { color: var(--warn); font-weight: 600; }
+      section { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; margin: 12px 0; }
+      button { margin: 4px 6px 4px 0; padding: 6px 10px; border-radius: 6px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); cursor: pointer; }
+      button:disabled { opacity: 0.5; cursor: default; }
+      pre { white-space: pre-wrap; word-break: break-all; font: 12px/1.4 ui-monospace, monospace; max-height: 420px; overflow: auto; }
+      small { color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>EPZ TP35 Pro — hardware spike</h1>
+      <p class="warn">Turn the volume down and take your IEMs out before every write. Probes overwrite band 10 in RAM only; "Restore snapshot" puts the original EQ back.</p>
+      <p><small>Chrome or Edge on localhost. Probes run one at a time; results accumulate below and can be downloaded as JSON.</small></p>
+      <section>
+        <button data-action="connect">Connect</button>
+        <span id="status">Not connected</span>
+      </section>
+      <section>
+        <h2>Read-only</h2>
+        <button data-action="describe" disabled>HID collections</button>
+        <button data-action="version" disabled>Firmware version</button>
+        <button data-action="state" disabled>Read EQ (first read becomes the snapshot)</button>
+        <button data-action="coefficients" disabled>Stored coefficients vs our formula</button>
+        <button data-action="nonce" disabled>Nonce echo</button>
+        <button data-action="registers" disabled>Utility registers (raw)</button>
+      </section>
+      <section>
+        <h2>Writes (RAM only)</h2>
+        <small>All writes need the snapshot first. Lower the volume: some probes add up to +6 dB.</small><br />
+        <button data-action="peak" disabled>+6 dB at 1 kHz</button>
+        <button data-action="coefUsed" disabled>Coefficients used? (+6 dB bass metadata, flat coefficients)</button>
+        <button data-action="hsCut" disabled>High shelf −6 dB at 4 kHz</button>
+        <button data-action="hsBoost" disabled>High shelf +6 dB metadata, flat coefficients</button>
+        <button data-action="type4" disabled>Type byte 4 with LP coefficients</button>
+        <button data-action="type5" disabled>Type byte 5 with HP coefficients</button>
+        <button data-action="restore" disabled>Restore snapshot</button>
+      </section>
+      <section>
+        <h2>Flash</h2>
+        <button data-action="save" disabled>Save +6 dB test to flash</button>
+        <button data-action="saveSnapshot" disabled>Save snapshot back to flash</button>
+        <small>After saving, unplug and replug, reconnect, then "Read EQ".</small>
+      </section>
+      <section>
+        <h2>Results</h2>
+        <button data-action="download">Download results JSON</button>
+        <label>Listening notes <input id="notes" size="60" /></label>
+        <pre id="log"></pre>
+      </section>
+    </main>
+    <script type="module" src="/src/spike-main.ts"></script>
+  </body>
+</html>
