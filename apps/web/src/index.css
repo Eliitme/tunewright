@@ -1,0 +1,60 @@
+@import "tailwindcss";
+@import "./components/glassyui/styles/liquid.css";
+
+/*
+ * App tokens follow GlassyUI's theme variables (set by GlassProvider through
+ * data-lg-theme on <html>), so custom parts like the EQ canvas match the glass controls.
+ */
+@theme {
+  --color-bg: var(--app-bg);
+  --color-surface: var(--lg-control-surface);
+  --color-surface-2: var(--lg-control-surface-hover);
+  --color-line: var(--lg-border);
+  --color-fg: var(--lg-foreground);
+  --color-muted: var(--lg-muted-foreground);
+  --color-accent: var(--lg-accent);
+  --color-accent-soft: color-mix(in srgb, var(--lg-accent) 18%, transparent);
+  --color-warn: var(--app-warn);
+  --color-danger: var(--app-danger);
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --app-bg: #e9edf3;
+  --app-warn: #b45309;
+  --app-danger: #c0262d;
+  /* Soft colour fields behind the glass so the frost has something to blur. */
+  --app-wallpaper:
+    radial-gradient(60rem 40rem at 10% -10%, #9fc5ff66, transparent 60%),
+    radial-gradient(50rem 36rem at 100% 10%, #c7a6ff55, transparent 60%),
+    radial-gradient(60rem 40rem at 50% 120%, #7fe0d055, transparent 60%);
+}
+
+:root[data-lg-theme="dark"] {
+  --app-bg: #0b0d12;
+  --app-warn: #f5a524;
+  --app-danger: #ff6b6b;
+  --app-wallpaper:
+    radial-gradient(60rem 40rem at 10% -10%, #2c5bd955, transparent 60%),
+    radial-gradient(50rem 36rem at 100% 10%, #7a3fd944, transparent 60%),
+    radial-gradient(60rem 40rem at 50% 120%, #0fa3a044, transparent 60%);
+}
+
+html, body {
+  background: var(--app-wallpaper) fixed, var(--app-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  min-height: 100%;
+}
+
+/*
+ * Chrome renders a dialog's own text through the dialog's backdrop filter, so
+ * titles and plain text came out blurred (inputs and buttons, which have their
+ * own filter, stayed sharp). Dialogs get a near-opaque surface instead; the
+ * overlay behind them still dims and blurs the page.
+ */
+.lg-dialog-content {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  background-color: color-mix(in srgb, var(--app-bg) 94%, transparent) !important;
+}
